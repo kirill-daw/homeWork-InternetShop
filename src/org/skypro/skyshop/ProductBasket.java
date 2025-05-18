@@ -28,12 +28,14 @@ public class ProductBasket {
     }
 
     public void printProductBasket() {
+        boolean isNotTotalPriceNull = false;
         for (Product value : products) {
             if (value != null) {
+                isNotTotalPriceNull = true;
                 System.out.println("<" + value.getName() + ">: " + "<" + value.getPrice() + ">");
             }
         }
-        if (this.totalPrice() != 0) {
+        if (isNotTotalPriceNull) {
             System.out.println("Total price: " + "<" + this.totalPrice() + ">");
         } else {
             System.out.println("Product basket is empty");
@@ -51,9 +53,7 @@ public class ProductBasket {
 
     public void toCleanProductBasket() {
         for (int i = 0; i < products.length; i++) {
-            if (products[i] != null) {
                 products[i] = null;
-            }
         }
     }
 }
