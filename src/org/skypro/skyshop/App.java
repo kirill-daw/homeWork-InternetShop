@@ -2,12 +2,12 @@ package org.skypro.skyshop;
 
 public class App {
     public static void main(String[] args) {
-        Product apple = new Product("apple", 50);
-        Product pen = new Product("pen", 20);
-        Product orange = new Product("orange", 70);
-        Product lamp = new Product("lamp", 520);
-        Product fish = new Product("fish", 120);
-        Product meet = new Product("meet", 220);
+        Product apple = new SimpleProduct("apple", 50);
+        Product pen = new FixPriceProduct("pen");
+        Product orange = new SimpleProduct("orange", 70);
+        Product lamp = new DiscountedProduct("lamp", 520, 25);
+        Product fish = new DiscountedProduct("fish", 120, 20);
+        Product meet = new SimpleProduct("meet", 220);
 
         ProductBasket productBasket1 = new ProductBasket();
         productBasket1.addProduct(meet);

@@ -29,14 +29,19 @@ public class ProductBasket {
 
     public void printProductBasket() {
         boolean isNotTotalPriceNull = false;
+        int countOfSpecialProducts = 0;
         for (Product value : products) {
             if (value != null) {
                 isNotTotalPriceNull = true;
-                System.out.println("<" + value.getName() + ">: " + "<" + value.getPrice() + ">");
+                System.out.println(value);
+            }
+            if (value != null && value.isSpecial()) {
+                countOfSpecialProducts++;
             }
         }
         if (isNotTotalPriceNull) {
             System.out.println("Total price: " + "<" + this.totalPrice() + ">");
+            System.out.println("Special products: <" + countOfSpecialProducts + ">");
         } else {
             System.out.println("Product basket is empty");
         }
@@ -53,7 +58,7 @@ public class ProductBasket {
 
     public void toCleanProductBasket() {
         for (int i = 0; i < products.length; i++) {
-                products[i] = null;
+            products[i] = null;
         }
     }
 }
