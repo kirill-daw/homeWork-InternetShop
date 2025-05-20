@@ -1,4 +1,4 @@
-package org.skypro.skyshop;
+package org.skypro.skyshop.product.type;
 
 public class DiscountedProduct extends Product {
     private final int basicPrice;
