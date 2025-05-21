@@ -9,11 +9,6 @@ public class SearchEngine {
 
     public Searchable[] search(String input) {
         Searchable[] searchResult = new Searchable[5];
-        add(searchResult, input);
-        return searchResult;
-    }
-
-    public void add(Searchable[] searchResult, String input) {
         int index = 0;
         for (Searchable value : searchables) {
             if (value.searchTerm().contains(input)) {
@@ -24,6 +19,7 @@ public class SearchEngine {
                 break;
             }
         }
+        return searchResult;
     }
 
     public void printArraySearch(Searchable[] search) {
