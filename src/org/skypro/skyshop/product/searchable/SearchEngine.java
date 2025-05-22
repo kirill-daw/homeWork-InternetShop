@@ -1,10 +1,12 @@
 package org.skypro.skyshop.product.searchable;
 
-public class SearchEngine {
-    private final Searchable[] searchables;
+import java.util.Arrays;
 
-    public SearchEngine(Searchable[] searchables) {
-        this.searchables = searchables;
+public class SearchEngine {
+    private Searchable[] searchables;
+
+    public SearchEngine(Searchable[] objects) {
+        this.searchables = objects;
     }
 
     public Searchable[] search(String input) {
@@ -28,5 +30,10 @@ public class SearchEngine {
                 System.out.println(value.getStringRepresentation());
             }
         }
+    }
+
+    public void add(Searchable object) {
+        searchables = Arrays.copyOf(searchables, searchables.length + 1);
+        searchables[searchables.length - 1] = object;
     }
 }

@@ -13,12 +13,33 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        Searchable[] searchables = new Searchable[0];
+        SearchEngine searchEngine = new SearchEngine(searchables);
+
         Product apple = new SimpleProduct("apple", 50);
+        searchEngine.add(apple);
+        Article articleApple = new Article("apple", "delicious apple");
+        searchEngine.add(articleApple);
         Product pen = new FixPriceProduct("pen");
+        searchEngine.add(pen);
+        Article articlePen = new Article("pen", "beautiful pen");
+        searchEngine.add(articlePen);
         Product orange = new SimpleProduct("orange", 70);
+        searchEngine.add(orange);
+        Article articleOrange = new Article("orange", "delicious orange");
+        searchEngine.add(articleOrange);
         Product lamp = new DiscountedProduct("lamp", 520, 25);
+        searchEngine.add(lamp);
+        Article articleLamp = new Article("lamp", "light lamp");
+        searchEngine.add(articleLamp);
         Product fish = new DiscountedProduct("fish", 120, 20);
+        searchEngine.add(fish);
+        Article articleFish = new Article("fish", "delicious fish");
+        searchEngine.add(articleFish);
         Product meet = new SimpleProduct("meet", 220);
+        searchEngine.add(meet);
+        Article articleMeet = new Article("meet", "delicious meet");
+        searchEngine.add(articleMeet);
 
         ProductBasket productBasket1 = new ProductBasket();
         productBasket1.addProduct(meet);
@@ -40,15 +61,8 @@ public class App {
         productBasket2.printProductBasket();
         System.out.println(productBasket2.checkProduct("orange"));
 
-        Article articleApple = new Article("apple", "delicious apple");
-        Article articlePen = new Article("pen", "beautiful pen");
-        Article articleFish = new Article("fish", "delicious fish");
-        Article articleMeet = new Article("meet", "delicious meet");
-        Article articleOrange = new Article("orange", "delicious orange");
-        Article articleLamp = new Article("lamp", "light lamp");
 
-        Searchable[] searchables = {apple, pen, fish, meet, orange, lamp, articleFish, articleApple, articlePen, articleLamp, articleMeet, articleOrange};
-        SearchEngine searchEngine = new SearchEngine(searchables);
+
         System.out.println("Enter search input: ");
         Scanner scanner = new Scanner(System.in);
         searchEngine.printArraySearch(searchEngine.search(scanner.nextLine()));
