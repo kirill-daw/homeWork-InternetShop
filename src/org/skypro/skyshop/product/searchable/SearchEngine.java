@@ -4,16 +4,18 @@ import java.util.Arrays;
 
 public class SearchEngine {
     private Searchable[] searchables;
+    private int countFullnessSearchables;
 
-    public SearchEngine(Searchable[] objects) {
-        this.searchables = objects;
+    public SearchEngine(int size) {
+        this.searchables = new Searchable[size];
+        this.countFullnessSearchables = 0;
     }
 
     public Searchable[] search(String input) {
         Searchable[] searchResult = new Searchable[5];
         int index = 0;
         for (Searchable value : searchables) {
-            if (value.searchTerm().contains(input)) {
+            if (value != null && value.searchTerm().contains(input)) {
                 searchResult[index] = value;
                 index++;
             }
@@ -33,7 +35,10 @@ public class SearchEngine {
     }
 
     public void add(Searchable object) {
+        searchables[countFullnessSearchables] = object;
+        countFullnessSearchables++;
+        if (searchables.length == countFullnessSearchables) {
         searchables = Arrays.copyOf(searchables, searchables.length + 1);
-        searchables[searchables.length - 1] = object;
+        }
     }
 }

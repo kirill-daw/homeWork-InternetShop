@@ -13,8 +13,7 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        Searchable[] searchables = new Searchable[0];
-        SearchEngine searchEngine = new SearchEngine(searchables);
+        SearchEngine searchEngine = new SearchEngine(3);
 
         Product apple = new SimpleProduct("apple", 50);
         searchEngine.add(apple);
@@ -60,8 +59,6 @@ public class App {
         productBasket2.toCleanProductBasket();
         productBasket2.printProductBasket();
         System.out.println(productBasket2.checkProduct("orange"));
-
-
 
         System.out.println("Enter search input: ");
         Scanner scanner = new Scanner(System.in);
