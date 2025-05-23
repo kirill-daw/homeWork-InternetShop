@@ -2,7 +2,6 @@ package org.skypro.skyshop;
 
 import org.skypro.skyshop.product.article.Article;
 import org.skypro.skyshop.product.searchable.SearchEngine;
-import org.skypro.skyshop.product.searchable.Searchable;
 import org.skypro.skyshop.product.type.DiscountedProduct;
 import org.skypro.skyshop.product.type.FixPriceProduct;
 import org.skypro.skyshop.product.type.Product;
