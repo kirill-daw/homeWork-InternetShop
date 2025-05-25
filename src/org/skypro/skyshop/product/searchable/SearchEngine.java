@@ -1,5 +1,7 @@
 package org.skypro.skyshop.product.searchable;
 
+import org.skypro.skyshop.product.searchable.exceptions.BestResultNotFound;
+
 import java.util.Arrays;
 
 public class SearchEngine {
@@ -15,7 +17,7 @@ public class SearchEngine {
         Searchable[] searchResult = new Searchable[5];
         int index = 0;
         for (Searchable value : searchables) {
-            if (value != null && value.searchTerm().contains(input)) {
+            if (value != null && value.searchTerm().toLowerCase().contains(input.toLowerCase())) {
                 searchResult[index] = value;
                 index++;
             }
@@ -24,6 +26,30 @@ public class SearchEngine {
             }
         }
         return searchResult;
+    }
+
+    public Searchable searchBestResult(String search) throws BestResultNotFound {
+        Searchable bestResult = null;
+        int maxMatchesInString = 0;
+        Searchable[] ArrayOfSearch = search(search);
+        for (int i = 0; i < ArrayOfSearch.length && ArrayOfSearch[i] != null; i++) {
+            int maxMatchesInStringOfObject = 0;
+            int indexStartSearch = 0;
+            int indexOfMatch = ArrayOfSearch[i].searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
+            do {
+                maxMatchesInStringOfObject++;
+                indexStartSearch = indexOfMatch + search.length();
+                indexOfMatch = ArrayOfSearch[i].searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
+            } while (indexOfMatch != -1);
+            if (maxMatchesInStringOfObject > maxMatchesInString) {
+                maxMatchesInString = maxMatchesInStringOfObject;
+                bestResult = ArrayOfSearch[i];
+            }
+        }
+        if (bestResult == null) {
+            throw new BestResultNotFound("<" + search + ">" + " is not found. ");
+        }
+        return bestResult;
     }
 
     public void printArraySearch(Searchable[] search) {
@@ -38,7 +64,7 @@ public class SearchEngine {
         searchables[countFullnessSearchables] = object;
         countFullnessSearchables++;
         if (searchables.length == countFullnessSearchables) {
-        searchables = Arrays.copyOf(searchables, searchables.length + 1);
+            searchables = Arrays.copyOf(searchables, searchables.length + 1);
         }
     }
 }
