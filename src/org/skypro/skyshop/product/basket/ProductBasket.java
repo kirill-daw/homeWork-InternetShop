@@ -51,7 +51,7 @@ public class ProductBasket {
 
     public boolean checkProduct(String product) {
         for (Product value : products) {
-            if (value != null && value.getName().equals(product)) {
+            if (value != null && value.getName().toLowerCase().equals(product.toLowerCase())) {
                 return true;
             }
         }
