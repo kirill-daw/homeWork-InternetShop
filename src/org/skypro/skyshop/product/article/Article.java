@@ -7,8 +7,12 @@ public class Article implements Searchable {
     private final String articleText;
 
     public Article(String articleTitle, String articleText) {
-        this.articleTitle = articleTitle;
-        this.articleText = articleText;
+        if (articleTitle != null && articleText != null && !articleTitle.isBlank() && !articleText.isBlank()) {
+            this.articleTitle = articleTitle;
+            this.articleText = articleText;
+        } else {
+            throw new IllegalArgumentException("The article is incomplete. ");
+        }
     }
 
     @Override

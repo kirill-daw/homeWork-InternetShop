@@ -52,17 +52,23 @@ public class App {
         productBasket2.addProduct(meet);
 
         productBasket2.printProductBasket();
+        System.out.println();
 
         System.out.println(productBasket2.checkProduct("Apple"));
         System.out.println(productBasket2.checkProduct("Coconut"));
+        System.out.println();
 
         productBasket2.toCleanProductBasket();
         productBasket2.printProductBasket();
+        System.out.println();
+
         System.out.println(productBasket2.checkProduct("Orange"));
+        System.out.println();
 
         System.out.println("Enter search input: ");
         Scanner scanner = new Scanner(System.in);
         searchEngine.printArraySearch(searchEngine.search(scanner.nextLine()));
+        System.out.println();
 
         try {
             Product appleJuice = new DiscountedProduct("Apple juice", 99, 150);
@@ -79,6 +85,7 @@ public class App {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println();
 
         try {
             System.out.println(searchEngine.searchBestResult("PEN"));
@@ -86,6 +93,7 @@ public class App {
             System.out.println(e.getMessage());
         } finally {
             System.out.println("Search is done. ");
+            System.out.println();
         }
 
         try {
@@ -95,5 +103,25 @@ public class App {
         } finally {
             System.out.println("Search is done. ");
         }
+        System.out.println();
+
+        productBasket1.addProduct(meet);
+        productBasket1.addProduct(fish);
+        productBasket1.addProduct(meet);
+        productBasket1.addProduct(orange);
+        productBasket1.addProduct(pen);
+        productBasket1.printProductBasket();
+        System.out.println();
+
+        System.out.println(productBasket1.toRemoveProductFromBasket("MEET") + " was deleted.");
+        System.out.println();
+
+        productBasket1.printProductBasket();
+        System.out.println();
+
+        System.out.println(productBasket1.toRemoveProductFromBasket("Coconut") + " list is empty.");
+        System.out.println();
+
+        productBasket1.printProductBasket();
     }
 }
