@@ -17,31 +17,31 @@ public class App {
 
         Product apple = new SimpleProduct("Apple", 50);
         searchEngine.add(apple);
-        Article articleApple = new Article("Apple", "delicious apple");
+        Article articleApple = new Article(apple.getName(), "delicious apple");
         searchEngine.add(articleApple);
         Product pen = new FixPriceProduct("Pen");
         searchEngine.add(pen);
-        Article articlePen = new Article("Pen", "beautiful pen");
+        Article articlePen = new Article(pen.getName(), "beautiful pen");
         searchEngine.add(articlePen);
         Product orange = new SimpleProduct("Orange", 70);
         searchEngine.add(orange);
-        Article articleOrange = new Article("Orange", "delicious orange");
+        Article articleOrange = new Article(orange.getName(), "delicious orange");
         searchEngine.add(articleOrange);
         Product lamp = new DiscountedProduct("Lamp", 520, 25);
         searchEngine.add(lamp);
-        Article articleLamp = new Article("Lamp", "light lamp");
+        Article articleLamp = new Article(lamp.getName(), "light lamp");
         searchEngine.add(articleLamp);
         Product fish = new DiscountedProduct("Fish", 120, 20);
         searchEngine.add(fish);
-        Article articleFish = new Article("Fish", "delicious fish");
+        Article articleFish = new Article(fish.getName(), "delicious fish");
         searchEngine.add(articleFish);
-        Product meet = new SimpleProduct("Meet", 220);
-        searchEngine.add(meet);
-        Article articleMeet = new Article("Meet", "delicious meet");
-        searchEngine.add(articleMeet);
+        Product meat = new SimpleProduct("Meat", 220);
+        searchEngine.add(meat);
+        Article articleMeat = new Article(meat.getName(), "delicious meat");
+        searchEngine.add(articleMeat);
 
         ProductBasket productBasket1 = new ProductBasket();
-        productBasket1.addProduct(meet);
+        productBasket1.addProduct(meat);
 
         ProductBasket productBasket2 = new ProductBasket();
         productBasket2.addProduct(apple);
@@ -49,7 +49,7 @@ public class App {
         productBasket2.addProduct(fish);
         productBasket2.addProduct(pen);
         productBasket2.addProduct(lamp);
-        productBasket2.addProduct(meet);
+        productBasket2.addProduct(meat);
 
         productBasket2.printProductBasket();
         System.out.println();
@@ -67,7 +67,7 @@ public class App {
 
         System.out.println("Enter search input: ");
         Scanner scanner = new Scanner(System.in);
-        searchEngine.printArraySearch(searchEngine.search(scanner.nextLine()));
+        searchEngine.printMapSearch(searchEngine.search(scanner.nextLine()));
         System.out.println();
 
         try {
@@ -105,15 +105,15 @@ public class App {
         }
         System.out.println();
 
-        productBasket1.addProduct(meet);
+        productBasket1.addProduct(meat);
         productBasket1.addProduct(fish);
-        productBasket1.addProduct(meet);
+        productBasket1.addProduct(meat);
         productBasket1.addProduct(orange);
         productBasket1.addProduct(pen);
         productBasket1.printProductBasket();
         System.out.println();
 
-        System.out.println(productBasket1.toRemoveProductFromBasket("MEET") + " was deleted.");
+        System.out.println(productBasket1.toRemoveProductFromBasket("Meat") + " was deleted.");
         System.out.println();
 
         productBasket1.printProductBasket();
