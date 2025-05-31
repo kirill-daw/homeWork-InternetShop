@@ -13,31 +13,31 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        SearchEngine searchEngine = new SearchEngine(3);
+        SearchEngine searchEngine = new SearchEngine();
 
         Product apple = new SimpleProduct("Apple", 50);
         searchEngine.add(apple);
-        Article articleApple = new Article(apple.getName(), "delicious apple");
+        Article articleApple = new Article(apple.getName() + " article", "delicious apple");
         searchEngine.add(articleApple);
         Product pen = new FixPriceProduct("Pen");
         searchEngine.add(pen);
-        Article articlePen = new Article(pen.getName(), "beautiful pen");
+        Article articlePen = new Article(pen.getName() + " article", "beautiful pen");
         searchEngine.add(articlePen);
         Product orange = new SimpleProduct("Orange", 70);
         searchEngine.add(orange);
-        Article articleOrange = new Article(orange.getName(), "delicious orange");
+        Article articleOrange = new Article(orange.getName() + " article", "delicious orange");
         searchEngine.add(articleOrange);
         Product lamp = new DiscountedProduct("Lamp", 520, 25);
         searchEngine.add(lamp);
-        Article articleLamp = new Article(lamp.getName(), "light lamp");
+        Article articleLamp = new Article(lamp.getName() + " article", "light lamp");
         searchEngine.add(articleLamp);
         Product fish = new DiscountedProduct("Fish", 120, 20);
         searchEngine.add(fish);
-        Article articleFish = new Article(fish.getName(), "delicious fish");
+        Article articleFish = new Article(fish.getName() + " article", "delicious fish");
         searchEngine.add(articleFish);
         Product meat = new SimpleProduct("Meat", 220);
         searchEngine.add(meat);
-        Article articleMeat = new Article(meat.getName(), "delicious meat");
+        Article articleMeat = new Article(meat.getName() + " article", "delicious meat");
         searchEngine.add(articleMeat);
 
         ProductBasket productBasket1 = new ProductBasket();
@@ -67,7 +67,7 @@ public class App {
 
         System.out.println("Enter search input: ");
         Scanner scanner = new Scanner(System.in);
-        searchEngine.printMapSearch(searchEngine.search(scanner.nextLine()));
+        searchEngine.printSetOfSearch(searchEngine.search(scanner.nextLine()));
         System.out.println();
 
         try {
