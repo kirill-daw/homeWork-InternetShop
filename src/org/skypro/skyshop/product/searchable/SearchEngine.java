@@ -1,8 +1,10 @@
 package org.skypro.skyshop.product.searchable;
 
+import org.skypro.skyshop.product.searchable.comparator.SearchableStandardOrderComparator;
 import org.skypro.skyshop.product.searchable.exceptions.BestResultNotFound;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class SearchEngine {
     private HashSet<Searchable> searchables;
@@ -12,22 +14,15 @@ public class SearchEngine {
     }
 
     public TreeSet<Searchable> search(String input) {
-        TreeSet<Searchable> searchResult = new TreeSet<>(new Comparator<Searchable>() {
-            @Override
-            public int compare(Searchable o1, Searchable o2) {
-                int comparisonLengths = Integer.compare(o1.getName().length(), o2.getName().length());
-                if (comparisonLengths != 0) {
-                    return 0;
-                }
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
-        for (Searchable value : searchables) {
-            if (value.searchTerm().toLowerCase().contains(input.toLowerCase())) {
-                searchResult.add(value);
-            }
-        }
-        return searchResult;
+        return searchables.stream()
+                .filter(searchable ->
+                        searchable
+                                .searchTerm()
+                                .toLowerCase()
+                                .contains(input.toLowerCase()))
+                .collect(Collectors
+                        .toCollection(() -> new TreeSet<>
+                                (new SearchableStandardOrderComparator())));
     }
 
     public Searchable searchBestResult(String search) throws BestResultNotFound {
