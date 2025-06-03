@@ -2,10 +2,7 @@ package org.skypro.skyshop.product.basket;
 
 import org.skypro.skyshop.product.type.Product;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 public class ProductBasket {
     private final HashMap<String, LinkedList<Product>> products;
@@ -25,31 +22,35 @@ public class ProductBasket {
     }
 
     public int totalPrice() {
-        int totalPrice = 0;
-        for (Map.Entry<String, LinkedList<Product>> value : products.entrySet()) {
-            for (Product product : value.getValue()) {
-                totalPrice += product.getPrice();
-            }
-        }
-        return totalPrice;
+        return products.values().stream()
+                .flatMap
+                        (Collection::stream)
+                .mapToInt
+                        (Product::getPrice)
+                .sum();
+    }
+
+    private int getSpecialCount() {
+        return (int) products.values().stream()
+                .flatMap
+                        (Collection::stream)
+                .filter
+                        (Product::isSpecial)
+                .count();
     }
 
     public void printProductBasket() {
-        int countOfSpecialProducts = 0;
         if (products.isEmpty()) {
             System.out.println("Product basket is empty");
             return;
         }
-        for (Map.Entry<String, LinkedList<Product>> value : products.entrySet()) {
-            for (Product product : value.getValue()) {
-                System.out.println(product);
-                if (product.isSpecial()) {
-                    countOfSpecialProducts++;
-                }
-            }
-        }
+        products.values().stream()
+                .flatMap
+                        (Collection::stream)
+                .forEach
+                        (System.out::println);
         System.out.println("Total price: " + "<" + this.totalPrice() + ">");
-        System.out.println("Special products: <" + countOfSpecialProducts + ">");
+        System.out.println("Special products: <" + getSpecialCount() + ">");
     }
 
     public boolean checkProduct(String product) {
