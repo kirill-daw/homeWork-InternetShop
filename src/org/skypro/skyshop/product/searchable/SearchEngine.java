@@ -2,22 +2,29 @@ package org.skypro.skyshop.product.searchable;
 
 import org.skypro.skyshop.product.searchable.exceptions.BestResultNotFound;
 
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class SearchEngine {
-    private ArrayList<Searchable> searchables;
+    private HashSet<Searchable> searchables;
 
-    public SearchEngine(int size) {
-        this.searchables = new ArrayList<>(size);
+    public SearchEngine() {
+        this.searchables = new HashSet<>();
     }
 
-    public TreeMap<String, Searchable> search(String input) {
-        TreeMap<String, Searchable> searchResult = new TreeMap<>();
+    public TreeSet<Searchable> search(String input) {
+        TreeSet<Searchable> searchResult = new TreeSet<>(new Comparator<Searchable>() {
+            @Override
+            public int compare(Searchable o1, Searchable o2) {
+                int comparisonLengths = Integer.compare(o1.getName().length(), o2.getName().length());
+                if (comparisonLengths != 0) {
+                    return 0;
+                }
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
         for (Searchable value : searchables) {
             if (value.searchTerm().toLowerCase().contains(input.toLowerCase())) {
-                searchResult.put(value.searchTerm(), value);
+                searchResult.add(value);
             }
         }
         return searchResult;
@@ -26,19 +33,19 @@ public class SearchEngine {
     public Searchable searchBestResult(String search) throws BestResultNotFound {
         Searchable bestResult = null;
         int maxMatchesInString = 0;
-        TreeMap<String, Searchable> mapOfSearch = search(search);
-        for (Map.Entry<String, Searchable> result : mapOfSearch.entrySet()) {
+        TreeSet<Searchable> mapOfSearch = search(search);
+        for (Searchable result : mapOfSearch) {
             int maxMatchesInStringOfObject = 0;
             int indexStartSearch = 0;
-            int indexOfMatch = result.getValue().searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
+            int indexOfMatch = result.searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
             do {
                 maxMatchesInStringOfObject++;
                 indexStartSearch = indexOfMatch + search.length();
-                indexOfMatch = result.getValue().searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
+                indexOfMatch = result.searchTerm().toLowerCase().indexOf(search.toLowerCase(), indexStartSearch);
             } while (indexOfMatch != -1);
             if (maxMatchesInStringOfObject > maxMatchesInString) {
                 maxMatchesInString = maxMatchesInStringOfObject;
-                bestResult = result.getValue();
+                bestResult = result;
             }
         }
         if (bestResult == null) {
@@ -47,10 +54,10 @@ public class SearchEngine {
         return bestResult;
     }
 
-    public void printMapSearch(TreeMap<String, Searchable> search) {
-        for (Map.Entry<String, Searchable> value : search.entrySet()) {
+    public void printSetOfSearch(TreeSet<Searchable> search) {
+        for (Searchable value : search) {
             if (value != null) {
-                System.out.println(value.getValue().getStringRepresentation());
+                System.out.println(value.getStringRepresentation());
             }
         }
     }
